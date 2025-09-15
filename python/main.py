@@ -55,6 +55,12 @@ senha = input('Digite sua senha: '))
 session.add(novo_usuario)
 session.commit()
 
+nova_equipe = Equipe(nome_equipe = input('Digite nome da equipe: '),
+funcao_equipe = input('Digite a função da equipe: '))
+
+session.add(nova_equipe)
+session.commit()
+
 # Inspeciona o banco de dados e mosta os nomes das tabelas do banco.
 insp = inspect(db)
 tabelas = insp.get_table_names()
