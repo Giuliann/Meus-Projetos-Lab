@@ -2,6 +2,8 @@ from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import declarative_base, sessionmaker
 from banco import db
 
+# Cria uma sessão
+
 Session = sessionmaker(bind=db())
 session = Session()
 
@@ -24,7 +26,7 @@ class Usuario(Base):
         self.email = email
         self.senha = senha
 
-#Tabela da Equipes:
+# Tabela da Equipes:
 
 class Equipe(Base):
 	__tablename__ = 'equipes'
@@ -38,5 +40,5 @@ class Equipe(Base):
 		self.funcao_equipe = funcao_equipe
 
 
-
+# Crie todas as tabelas definidas.
 Base.metadata.create_all(bind=db())
