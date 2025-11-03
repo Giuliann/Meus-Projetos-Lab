@@ -46,4 +46,33 @@ class Banco():
             valores, contagens = np.unique(coluna, return_counts=True)
             for val, oc in zip(valores, contagens):
                 print(f"{val} → {oc} ocorrências")
+        
+        def media_e_desvio(self):
+            # Media e desvio do paylaod: 
+            paylaod = []
+            for x in self.data[:, 45]:
+                if x not in (None, '', 'None'):
+                    paylaod.append(float(x))
+                    try:
+                        paylaod.append(float(x))
+                    except ValueError:
+                        continue
+
+            media_payload = np.mean(paylaod) if paylaod else float('nan')
+            desvio_payload = np.std(paylaod) if paylaod else float('nan')
+
+            # Media e desvio dos pacotes: 
+            pacotes = []
+            for x in self.data[:, 22]:
+                if x not in (None, '', 'None'):
+                    try:
+                        pacotes.append(float(x))
+                    except ValueError:
+                        continue
+
+            media_pacote = np.mean(pacotes) if pacotes else float('nan')
+            desvio_pacote = np.std(pacotes) if pacotes else float('nan')
+
+            print(f'\n\nMedia do payload:{media_payload} e seu desvio{desvio_payload}\n\n')
+            print(f'\n\nMedia do pacote:{media_pacote} e seu desvio{desvio_pacote}\n\n')
 

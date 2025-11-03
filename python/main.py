@@ -27,6 +27,9 @@ def menu():
 			Dos_Csv.exibir()
 			input('Pressione Enter para continuar com a vizualização das Ocorrencias...')
 			Dos_Csv.ocorrencias()
+			print('Pressione Enter para exibir media e desvio')
+			Dos_Csv.media_e_desvio()
+			
 			print('\n\nDeseja voltar para o menu?')
 
 			# Voltar para o menu: 
