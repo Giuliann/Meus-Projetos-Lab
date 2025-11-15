@@ -4,6 +4,7 @@ from sqlalchemy import inspect, text
 
 
 class Banco():
+        # Inicio do Banco: 
         def __init__(self, nome):
             self.nome = nome
             self.local = create_engine("sqlite:///banco_local/{}.db".format(self.nome), echo=False)
@@ -34,8 +35,7 @@ class Banco():
             self.data = np.array(self.linhas)
             print(f"\nNúmero de linhas e colunas: {self.data.shape}\n")
 
-
-        # Exibe as arrays
+        # Exibe as arrays: 
         def exibir(self):
             for data_array in self.data:
                 print(f"\n{data_array}")
@@ -47,6 +47,7 @@ class Banco():
             for val, oc in zip(valores, contagens):
                 print(f"{val} → {oc} ocorrências")
         
+        # Exibe a media de desvios do paylaod e dos pacotes: 
         def media_e_desvio(self):
             # Media e desvio do paylaod: 
             paylaod = []
@@ -75,4 +76,23 @@ class Banco():
 
             print(f'\n\nMedia do payload:{media_payload} e seu desvio{desvio_payload}\n\n')
             print(f'\n\nMedia do pacote:{media_pacote} e seu desvio{desvio_pacote}\n\n')
+
+        # Exibe as alives, media entre os intervalos e a media de frquencia entre as alives
+        def frequencia_alive(self):
+            alive = [linha for linha in self.data if linha[48] in (12, 13)]
+
+            if not alive:
+                print('Pacote não encontrado')
+                return
+            
+            tempo = sorted([float(linha[2]) for linha in alive])
+            intervalo = np.diff(tempo)
+            media_intevalo = np.mean(intervalo)
+            frequencia = 1 / media_intevalo
+
+            print(f'Alives encontradas: {len(alive)}')
+            print(f'Media entre os intervalos: {media_intevalo:.6f} segundos')
+            print(f'Media da frequencia: {frequencia:.6f} alive por segundo')
+
+
 

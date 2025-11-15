@@ -27,8 +27,10 @@ def menu():
 			Dos_Csv.exibir()
 			input('Pressione Enter para continuar com a vizualização das Ocorrencias...')
 			Dos_Csv.ocorrencias()
-			print('Pressione Enter para exibir media e desvio')
+			input('Pressione Enter para exibir media e desvio')
 			Dos_Csv.media_e_desvio()
+			input('Pressione Enter para exibir a frequencia da alive')
+			Dos_Csv.frequencia_alive()
 			
 			print('\n\nDeseja voltar para o menu?')
 
@@ -51,6 +53,10 @@ def menu():
 			Intrusion_Csv.exibir()
 			input('Pressione Enter para continuar com a vizualização das Ocorrencias...')
 			Intrusion_Csv.ocorrencias()
+			input('Pressione Enter para exibir media e desvio')
+			Intrusion_Csv.media_e_desvio()
+			input('Pressione Enter para exibir a frequencia da alive')
+			Intrusion_Csv.frequencia_alive()
 			print('\n\nDeseja voltar para o menu?')
 
 			# Voltar para o menu: 
@@ -72,6 +78,10 @@ def menu():
 			MitM_Csv.exibir()
 			input('Pressione Enter para continuar com a vizualização das Ocorrencias...')
 			MitM_Csv.ocorrencias()
+			input('Pressione Enter para exibir media e desvio')
+			MitM_Csv.media_e_desvio()
+			input('Pressione Enter para exibir a frequencia da alive')
+			MitM_Csv.frequencia_alive()
 			print('\n\nDeseja voltar para o menu?')
 
 			# Voltar para o menu: 
