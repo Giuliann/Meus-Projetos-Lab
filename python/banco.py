@@ -77,7 +77,7 @@ class Banco():
             print(f'\n\nMedia do payload:{media_payload} e seu desvio{desvio_payload}\n\n')
             print(f'\n\nMedia do pacote:{media_pacote} e seu desvio{desvio_pacote}\n\n')
 
-        # Exibe as alives, media entre os intervalos e a media de frquencia entre as alives
+        # Exibe as alives, media entre os intervalos e a media de frquencia entre as alives:
         def frequencia_alive(self):
             alive = [linha for linha in self.data if linha[48] in (12, 13)]
 
@@ -94,7 +94,7 @@ class Banco():
             print(f'Media entre os intervalos: {media_intevalo:.6f} segundos')
             print(f'Media da frequencia: {frequencia:.6f} alive por segundo')
         
-        # Exibe e media e desvio dos tamanho dos topicos 'Publish' e 'Subscribe'
+        # Exibe e media e desvio dos tamanho dos topicos 'Publish' e 'Subscribe':
         def media_desvio_topico(self):
             publish = []
             subscribs = []
@@ -121,7 +121,7 @@ class Banco():
             print(f'Publish media: {media_pub:.2f} e desvio: {desvio_pub:.2f}')
             print(f'Subscribe media: {media_sub:.2f} e desvio: {desvio_sub:.2f}')
 
-        # Conta e exibe as mensagens 'QOS 1', 'QOS 2' e 'QOS 3'
+        # Conta e exibe as mensagens 'QOS 1', 'QOS 2' e 'QOS 3':
         def distribuição_msg_QOS(self):
             qos1 = 0
             qos2 = 0
@@ -155,3 +155,61 @@ class Banco():
             print(f'QOS 3: {qos3} mensagens ({(qos3/total)*100:.2f}%)')
             print(f'Mensagens totais: {total}')
 
+        # Exibe o tempo entre o primeiro e ultimo pacote:
+        def temp_pacotes(self):
+            tempos = []
+            for linha in self.data:
+                 tempo = linha[2]
+                 if tempo not in ('None', '', None):
+                    try:
+                        tempos.append(float(tempo))
+                    except:
+                        continue
+
+            # menssagem de erro:
+            if len(tempos) < 2:
+                print('Não existe tempo suficiente para calcular duração')
+                return
+            
+            inicio = min(tempos)
+            fim = max(tempos)
+            duracao = fim - inicio
+
+            print(f'Tempo total da conexão: {duracao:.2f} segundos')
+            print(f'Inicio da conexão: {inicio}')
+            print(f'Fim da conexão: {fim}')
+
+        # Exibe a proporção de pacotes de entrada/saida: 
+        def proporcao_entrada_saida(self):
+            client_ip  = self.data[0][5]
+
+            entrada = 0
+            saida = 0
+
+            for linha in self.data:
+                src = linha[5]
+                dst = linha[6]
+
+                if dst == client_ip:
+                    entrada = entrada + 1
+
+                elif src == client_ip:
+                    saida = saida + 1
+
+            total = entrada + saida
+            if total == 0:
+                # menssagem de erro:
+                print('Não da pra efetuar o calculo')
+                return
+            
+            # porcentagem dos pacotes:
+            prop_entrada = entrada / total*100
+            prop_saida = saida / total*100
+
+            print(f'IP do cliente: {client_ip}')
+            print(f'Entrada dos pacotes {entrada} ({prop_entrada:.2f}%)')
+            print(f'Saida dos pacotes {saida} ({prop_saida:.2f}%)')
+            print(f'Total de pacotes analisados: {total} pacotes')
+                
+
+            

@@ -31,6 +31,10 @@ def menu():
 			Dos_Csv.media_e_desvio()
 			input('Pressione Enter para exibir a frequencia da alive')
 			Dos_Csv.frequencia_alive()
+			Dos_Csv.media_desvio_topico()
+			Dos_Csv.distribuição_msg_QOS()
+			Dos_Csv.temp_pacotes()
+			Dos_Csv.proporcao_entrada_saida()
 			
 			print('\n\nDeseja voltar para o menu?')
 
@@ -57,6 +61,11 @@ def menu():
 			Intrusion_Csv.media_e_desvio()
 			input('Pressione Enter para exibir a frequencia da alive')
 			Intrusion_Csv.frequencia_alive()
+			Intrusion_Csv.media_desvio_topico()
+			Intrusion_Csv.distribuição_msg_QOS()
+			Intrusion_Csv.temp_pacotes()
+			Intrusion_Csv.proporcao_entrada_saida()
+
 			print('\n\nDeseja voltar para o menu?')
 
 			# Voltar para o menu: 
@@ -82,6 +91,11 @@ def menu():
 			MitM_Csv.media_e_desvio()
 			input('Pressione Enter para exibir a frequencia da alive')
 			MitM_Csv.frequencia_alive()
+			MitM_Csv.media_desvio_topico()
+			MitM_Csv.distribuição_msg_QOS()
+			MitM_Csv.temp_pacotes()
+			MitM_Csv.proporcao_entrada_saida()
+
 			print('\n\nDeseja voltar para o menu?')
 
 			# Voltar para o menu: 
