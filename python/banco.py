@@ -93,6 +93,65 @@ class Banco():
             print(f'Alives encontradas: {len(alive)}')
             print(f'Media entre os intervalos: {media_intevalo:.6f} segundos')
             print(f'Media da frequencia: {frequencia:.6f} alive por segundo')
+        
+        # Exibe e media e desvio dos tamanho dos topicos 'Publish' e 'Subscribe'
+        def media_desvio_topico(self):
+            publish = []
+            subscribs = []
+            
+            for linha in self.data:
+                msgttype = linha[48]
+                topico = linha[57]
+                if topico in('None', '', None):
+                    continue
+            
+            tamanho = len(str(topico))
+            if msgttype == 3:
+                publish.append(tamanho)
+            if msgttype == 8:
+                subscribs.append(tamanho)
 
+            media_pub = np.mean(publish) if publish else 0
+            desvio_pub = np.std(publish) if publish else 0
 
+            media_sub = np.mean(subscribs) if subscribs else 0
+            desvio_sub = np.std(subscribs) if subscribs else 0
+
+            print('Media e desvio dos topicos')
+            print(f'Publish media: {media_pub:.2f} e desvio: {desvio_pub:.2f}')
+            print(f'Subscribe media: {media_sub:.2f} e desvio: {desvio_sub:.2f}')
+
+        # Conta e exibe as mensagens 'QOS 1', 'QOS 2' e 'QOS 3'
+        def distribuição_msg_QOS(self):
+            qos1 = 0
+            qos2 = 0
+            qos3 = 0
+
+            for linha in self.data:
+                qos = linha[53]
+
+                if qos in ('None', '', None):
+                    continue
+
+                try:
+                    qos = int(float(qos))
+                except:
+                    continue
+
+                if qos == 0:
+                    qos1 = qos1 + 1
+
+                elif qos == 1:
+                    qos2 = qos2 + 1
+
+                elif qos == 2:
+                    qos3 = qos3 + 1
+
+            total = qos1 + qos2 + qos3
+
+            print('Mensagens QOS: ')
+            print(f'QOS 1: {qos1} mensagens ({(qos1/total)*100:.2f}%)')
+            print(f'QOS 2: {qos2} mensagens ({(qos2/total)*100:.2f}%)')
+            print(f'QOS 3: {qos3} mensagens ({(qos3/total)*100:.2f}%)')
+            print(f'Mensagens totais: {total}')
 
